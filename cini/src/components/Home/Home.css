@@ -1,0 +1,44 @@
+.header {
+    height: 6vh;
+    width: 100%;
+    display: flex;
+}
+
+.headerTitle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    padding: 5px;
+    flex: 0 0 10em;
+    color: blue;
+    font-weight: bold;
+    font-size: large;
+}
+
+.headerOptions {
+    flex-direction: row-reverse;
+    display: flex;
+    flex: 1 1 10em;
+    margin-right: 30px;
+}
+
+.options {
+    flex-direction: row;
+    padding: 5px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    margin: 12px;
+    font-size: smaller;
+}
+
+.body {
+    position: relative;
+    height: 92vh;
+}
+
+.footer {
+    position: relative;
+    height: 2vh;
+}

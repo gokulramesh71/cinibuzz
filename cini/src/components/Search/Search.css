@@ -1,0 +1,11 @@
+.searchRow {
+    display: flex;
+    width: 80%;
+    justify-content: center;
+    align-items: center;
+}
+
+.searchBody {
+    display: flex;
+    flex-direction: row;
+}
