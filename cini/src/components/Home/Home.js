@@ -1,6 +1,6 @@
 import React from 'react';
 import './Home.css';
-import CategoryList from '../CategoryList/CategoryList';
+import ImageFrame from '../ImageFrame/ImageFrame';
 
 function Home() {
   const optionList = ["Kids", "TV Shows", "Movies"];
@@ -18,7 +18,7 @@ function Home() {
             
         </div>
         <div className="body">
-                <CategoryList/>
+                <ImageFrame/>
         </div>
         <div className="footer">Hi It is home!!!!</div>
     </div>
