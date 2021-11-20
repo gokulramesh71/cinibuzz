@@ -1,6 +1,6 @@
 import React from 'react';
 import './Home.css';
-import ImageFrame from '../ImageFrame/ImageFrame';
+import CastSlider from '../CastSlider/CastSlider';
 
 function Home() {
   const optionList = ["Kids", "TV Shows", "Movies"];
@@ -18,7 +18,7 @@ function Home() {
             
         </div>
         <div className="body">
-                <ImageFrame/>
+                <CastSlider/>
         </div>
         <div className="footer">Hi It is home!!!!</div>
     </div>
