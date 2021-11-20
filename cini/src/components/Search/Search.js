@@ -17,7 +17,6 @@ function Search() {
                 <InputBase  
                 sx={{ ml: 1, flex: 1, fontSize: '13px' }}
                 placeholder="Search movies"
-                // inputProps={{ 'aria-label': 'search google maps' }}
                 />
             </Paper>
             <Button variant="contained"

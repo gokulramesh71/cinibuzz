@@ -1,6 +1,6 @@
 import React from 'react';
 import './Home.css';
-import Search from '../Search/Search';
+import CategoryList from '../CategoryList/CategoryList';
 
 function Home() {
   const optionList = ["Kids", "TV Shows", "Movies"];
@@ -18,7 +18,7 @@ function Home() {
             
         </div>
         <div className="body">
-                <Search/>
+                <CategoryList/>
         </div>
         <div className="footer">Hi It is home!!!!</div>
     </div>
