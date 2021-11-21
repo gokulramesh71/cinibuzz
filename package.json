@@ -1,0 +1,22 @@
+{
+  "name": "cinibuzz",
+  "version": "1.0.0",
+  "description": "Sample movie db UI project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://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@github.com/gokulramesh71/cinibuzz.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gokulramesh71/cinibuzz/issues"
+  },
+  "homepage": "https://github.com/gokulramesh71/cinibuzz#readme",
+  "dependencies": {
+    "create-react-app": "^4.0.3"
+  }
+}
