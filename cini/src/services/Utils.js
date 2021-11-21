@@ -19,5 +19,5 @@ export const subTitle = (movieObj) => {
         genreList += ind === arr.length -1 ? '':',';
     });
     let duration = Math.floor(movieObj.runtime/60) + 'h ' + movieObj.runtime % 60 + 'm';
-    return date + ' (IN) |' + genreList + ' |' + duration;
+    return date + ' (IN) | ' + genreList + ' | ' + duration;
 }

@@ -1,3 +1,7 @@
 .MuiTableCell-root {
     border: 0;
 }
+
+.overviewText {
+    font-size: large;
+}

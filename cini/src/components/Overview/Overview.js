@@ -18,13 +18,13 @@ function Overview(props) {
                   <TableBody>
                     <TableRow>
                      <TableCell sx={{display: 'flex', flexDirection: 'column', border: 0}}>
-                        <h3>Overview</h3>
-                        <div>
+                        <h2>Overview</h2>
+                        <div className="overviewText">
                           {row.overview}
                         </div>
                      </TableCell> 
                     </TableRow>
-                    <TableRow>
+                    {/* <TableRow>
                       <TableCell sx={{border: 0}}>
                         <Table>
                             <TableBody>
@@ -35,7 +35,7 @@ function Overview(props) {
                             </TableBody>
                           </Table>
                       </TableCell>
-                    </TableRow>
+                    </TableRow> */}
                   </TableBody>
                 </Table>
               </TableCell>
@@ -43,28 +43,28 @@ function Overview(props) {
                 <Table>
                   <TableBody>
                     <TableRow>
-                      <TableCell sx ={{display: 'flex', flexDirection: 'column', border: 0}}>
+                      <TableCell sx ={{display: 'flex', flexDirection: 'column', border: 0, fontSize:'0.875rem', padding: '10px'}}>
                         <h3>Status</h3>
                         <div>{row.status}</div>
                       </TableCell>
                     </TableRow>
 
                     <TableRow>
-                      <TableCell sx ={{display: 'flex', flexDirection: 'column', border: 0}}>
+                      <TableCell sx ={{display: 'flex', flexDirection: 'column', border: 0, fontSize:'0.875rem', padding: '10px'}}>
                         <h3>Original Language</h3>
                         <div>{row.original_language}</div>
                       </TableCell>
                     </TableRow>
 
                     <TableRow>
-                      <TableCell sx ={{display: 'flex', flexDirection: 'column', border: 0}}>
+                      <TableCell sx ={{display: 'flex', flexDirection: 'column', border: 0, fontSize:'0.875rem', padding: '10px'}}>
                         <h3>Budget</h3>
                         <div>{row.budget}</div>
                       </TableCell>
                     </TableRow>
 
                     <TableRow>
-                      <TableCell sx ={{display: 'flex', flexDirection: 'column', border: 0}}>
+                      <TableCell sx ={{display: 'flex', flexDirection: 'column', border: 0, fontSize:'0.875rem', padding: '10px'}}>
                         <h3>Revenue</h3>
                         <div>{row.revenue}</div>
                       </TableCell>

@@ -35,6 +35,10 @@ export default class Home extends React.Component {
 
 
   componentDidMount() {
+    this.getData();
+  }
+
+  getData = () => {
     dataFetch("https://api.themoviedb.org/3/genre/movie/list?language=%3Cstring%3E&api_key=1c06a1911fa9fd7b91f24ab61c1f9330")
       .then(
         (result) => {
@@ -44,9 +48,7 @@ export default class Home extends React.Component {
           });
         },
         (error) => {
-          // this.setState({
-          //   error
-          // });
+          //TODO Handle Error page/section
         }
       );
 
@@ -56,9 +58,7 @@ export default class Home extends React.Component {
           this.setState({imageArr:result.results, colSize: 4})
         },
         (error) => {
-          // this.setState({
-          //   error
-          // });
+          // Handle Error page/section
         }
       );
   }
@@ -71,9 +71,7 @@ export default class Home extends React.Component {
           this.setState({imageArr:result.results, colSize: 4})
         },
         (error) => {
-          // this.setState({
-          //   error
-          // });
+          // Handle Error page/section
         }
       );
       this.setState({searchEnabled: true, categoryTitle: 'Showing results for '+ val });
@@ -89,9 +87,7 @@ export default class Home extends React.Component {
         this.setState({imageClick: true, colSize: 1, imgWidth: this.state.imageBgWidth, imgHeight: this.state.imageBgHeight, imageArr: [result]});
       },
       (error) => {
-        // this.setState({
-        //   error
-        // });
+        // Handle Error page/section
       }
     );
 
@@ -102,9 +98,7 @@ export default class Home extends React.Component {
           
         },
         (error) => {
-          // this.setState({
-          //   error
-          // });
+          // Handle Error page/section
         }
       );
 
@@ -115,9 +109,7 @@ export default class Home extends React.Component {
           
         },
         (error) => {
-          // this.setState({
-          //   error
-          // });
+          // Handle Error page/section
         }
       );
 
@@ -128,20 +120,22 @@ export default class Home extends React.Component {
           
         },
         (error) => {
-          // this.setState({
-          //   error
-          // });
+          // Handle Error page/section
         }
       );
   } 
 
+  refreshHome = () => {
+    this.setState({searchEnabled: false, imageClick: false, imgHeight: '30', imgWidth: '15'});
+    this.getData();
+  }
 
   render () {
     const optionList = ["Kids", "TV Shows", "Movies"];
     return (
       <div>
           <div className="header">
-              <div className="headerTitle">{this.state.headerTitle}</div>
+              <div className="headerTitle" onClick={() => this.refreshHome()}>{this.state.headerTitle}</div>
               <div className="headerOptions">
                   {
                     optionList.map((opt, ind) => {
@@ -151,32 +145,43 @@ export default class Home extends React.Component {
               </div>
           </div>
           <div className="body">
-                  {!this.state.imageClick && <div className="searchBox">
-                    <Search searchCb={this.searchCb}/>
-                  </div>}
+                  {
+                    !this.state.imageClick &&
+                    <div className="searchBox">
+                        <Search searchCb={this.searchCb}/>
+                    </div>
+                  
+                  }
                   {!this.state.imageClick && <h5 className="categoryTitle">{this.state.categoryTitle}</h5>}
-                  {(!this.state.searchEnabled && !this.state.imageClick) && <CategoryList options={this.state.genres}/>}
-                  <ImageFrame colSize={this.state.colSize} width={this.state.imgWidth} height={this.state.imgHeight} imageArr={this.state.imageArr} furtherInfoCb={this.getFurtherInfo}/>
-                  {this.state.imageClick && <Overview rows={this.state.imageArr}/>}
-                  {this.state.imageClick && <CastSlider castList={this.state.castList}/>}
-                  {this.state.imageClick && <div className="mediaEx">
-                    <div className="media1">
-                      <div className="mediaBlock">
-                        <h2>Media</h2>
-                        <CategoryList options={[{'name':'Most Popular'}, {'name':'Videos'}, {'name':'Backdrops'}, {'name':'Posters'}]}/>
-                        <ImageFrame colSize={1} width={this.state.imageCastWidth} height={this.state.imageCastHeight} imageArr={this.state.imageArr}/>
-                      </div>
-                      <div className="keywords">
-                      <h2>Keywords</h2>
-                      <Keywords chips={this.state.chipList}/>
-                      </div>
-                    </div>
-                      <h2>Recommendations</h2>
-                      <ImageFrame colSize={3} height={this.state.imageRecmndHeight} width={this.state.imageRecmndWidth} imageArr={this.state.recommendList}/>
-                    <div>
 
-                    </div>
-                  </div>}
+                  {(!this.state.searchEnabled && !this.state.imageClick) && <CategoryList options={this.state.genres}/>}
+
+                  <ImageFrame colSize={this.state.colSize} width={this.state.imgWidth} height={this.state.imgHeight} imageArr={this.state.imageArr} furtherInfoCb={this.getFurtherInfo}/>
+                  
+                  {this.state.imageClick && <Overview rows={this.state.imageArr}/>}
+
+                  {this.state.imageClick && <CastSlider castList={this.state.castList}/>}
+
+                  {this.state.imageClick && 
+                      <div className="mediaEx">
+                        <div className="media1">
+                          <div className="mediaBlock">
+                            <h2>Media</h2>
+                            <CategoryList options={[{'name':'Most Popular'}, {'name':'Videos'}, {'name':'Backdrops'}, {'name':'Posters'}]}/>
+                            <ImageFrame colSize={1} width={this.state.imageCastWidth} height={this.state.imageCastHeight} imageArr={this.state.imageArr}/>
+                          </div>
+                          <div className="keywords">
+                          <h2>Keywords</h2>
+                          <Keywords chips={this.state.chipList}/>
+                          </div>
+                        </div>
+                          <h2>Recommendations</h2>
+                          <ImageFrame colSize={3} height={this.state.imageRecmndHeight} width={this.state.imageRecmndWidth} imageArr={this.state.recommendList} furtherInfoCb={this.getFurtherInfo}/>
+                        <div>
+
+                        </div>
+                      </div>
+                  }
           </div>
           <div className="footer"></div>
       </div>
