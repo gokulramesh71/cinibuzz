@@ -7,6 +7,12 @@ import ImageListItem from '@mui/material/ImageListItem';
 import ImageListItemBar from '@mui/material/ImageListItemBar';
 
 function CastSlider(props) {
+  const [value, setValue] = React.useState(0);
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
+
   return (
     <Box sx={{ flexGrow: 1, bgcolor: "background.paper" }}>
     <Typography variant="h5" component="h5">
@@ -16,6 +22,8 @@ function CastSlider(props) {
       variant="scrollable"
       scrollButtons
       aria-label="visible arrows tabs example"
+      value={value}
+      onChange={handleChange}
       sx={{
         [`& .${tabsClasses.scrollButtons}`]: {
           "&.Mui-disabled": { opacity: 0.3 }

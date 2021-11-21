@@ -3,13 +3,11 @@ import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 
 function CategoryList(props) {
-  const [alignment, setAlignment] = React.useState("New Release");
+  const [alignment, setAlignment] = React.useState('New Releases');
 
   const handleChange = (event, newAlignment) => {
     setAlignment(newAlignment);
   };
-
-  // const options = ['New Release', 'Upcoming', 'Action', 'Comedy', 'Crime', 'Drama', 'Thriller', 'Sci-Fi', 'Family', 'Horror'];
 
   return (
     <ToggleButtonGroup
@@ -21,7 +19,7 @@ function CategoryList(props) {
     >
       {
         props.options.length > 0 && props.options.map((opt, ind) => {
-          return (<ToggleButton key={ind} sx={{ pr: 2, border: 0, textTransform: 'none', fontSize:'0.875rem', borderRadius: '2px', flexGrow: 1 }} value={opt.name}>
+          return (<ToggleButton value={opt.name} key={ind} sx={{ pr: 2, border: 0, textTransform: 'none', fontSize:'0.875rem', borderRadius: '2px', flexGrow: 1 }}>
             {opt.name}
           </ToggleButton>);
         })

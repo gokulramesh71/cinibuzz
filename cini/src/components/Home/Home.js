@@ -4,6 +4,8 @@ import Search from '../Search/Search';
 import CategoryList from '../CategoryList/CategoryList';
 import ImageFrame from '../ImageFrame/ImageFrame';
 import CastSlider from '../CastSlider/CastSlider';
+import Overview from '../Overview/Overview';
+import Keywords from '../Keywords/Keywords';
 
 export default class Home extends React.Component {
   constructor(props) {
@@ -18,7 +20,8 @@ export default class Home extends React.Component {
       colSize: 4,
       imgHeight: 150,
       castList:[],
-      recommendList:[]
+      recommendList:[],
+      chipList:[]
     };
   }
 
@@ -81,6 +84,19 @@ export default class Home extends React.Component {
   }
 
   getFurtherInfo = (info) => {
+    fetch("https://api.themoviedb.org/3/movie/" + info.id + "?api_key=1c06a1911fa9fd7b91f24ab61c1f9330")
+    .then(res => res.json())
+    .then(
+      (result) => {
+        this.setState({imageClick: true, colSize: 1, imgHeight: 50, imageArr: [result]});
+      },
+      (error) => {
+        // this.setState({
+        //   error
+        // });
+      }
+    );
+
     fetch("https://api.themoviedb.org/3/movie/" + info.id + "/credits?api_key=1c06a1911fa9fd7b91f24ab61c1f9330")
       .then(res => res.json())
       .then(
@@ -112,8 +128,22 @@ export default class Home extends React.Component {
           // });
         }
       );
-    this.setState({imageClick: true, colSize: 1, imgHeight: 50, imageArr: [info]});
 
+      fetch("https://api.themoviedb.org/3/movie/" + info.id + "/keywords?api_key=1c06a1911fa9fd7b91f24ab61c1f9330")
+      .then(res => res.json())
+      .then(
+        (result) => {
+          this.setState({chipList: result.keywords})
+          // this.setState({
+          //   genres: result.genres
+          // });
+        },
+        (error) => {
+          // this.setState({
+          //   error
+          // });
+        }
+      );
   } 
 
 
@@ -138,16 +168,18 @@ export default class Home extends React.Component {
                   {!this.state.imageClick && <h5 className="categoryTitle">{this.state.categoryTitle}</h5>}
                   {(!this.state.searchEnabled && !this.state.imageClick) && <CategoryList options={this.state.genres}/>}
                   <ImageFrame colSize={this.state.colSize} height={this.state.imgHeight} imageArr={this.state.imageArr} furtherInfoCb={this.getFurtherInfo}/>
+                  {this.state.imageClick && <Overview rows={this.state.imageArr}/>}
                   {this.state.imageClick && <CastSlider castList={this.state.castList}/>}
                   {this.state.imageClick && <div className="mediaEx">
                     <div className="media1">
                       <div className="mediaBlock">
                         <h2>Media</h2>
-                        <CategoryList options={['Most Popular', 'Videos', 'Backdrops', 'Posters']}/>
+                        <CategoryList options={[{'name':'Most Popular'}, {'name':'Videos'}, {'name':'Backdrops'}, {'name':'Posters'}]}/>
                         <ImageFrame colSize={1} height={25} imageArr={this.state.imageArr}/>
                       </div>
                       <div className="keywords">
                       <h2>KEYWORDS</h2>
+                      <Keywords chips={this.state.chipList}/>
                       </div>
                     </div>
                       <h2>Recommendations</h2>
