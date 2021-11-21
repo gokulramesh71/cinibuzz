@@ -42,10 +42,13 @@ export default class Home extends React.Component {
     dataFetch("https://api.themoviedb.org/3/genre/movie/list?language=%3Cstring%3E&api_key=1c06a1911fa9fd7b91f24ab61c1f9330")
       .then(
         (result) => {
-          result.genres.unshift({"name": "New Releases"}, {"name": "Upcoming"});
-          this.setState({
-            genres: result.genres
-          });
+          if (result && result.genres) {
+            result.genres.unshift({"name": "New Releases"}, {"name": "Upcoming"});
+            this.setState({
+              genres: result.genres
+            });
+          }
+          
         },
         (error) => {
           //TODO Handle Error page/section
@@ -55,7 +58,7 @@ export default class Home extends React.Component {
       dataFetch("https://api.themoviedb.org/3/movie/now_playing?api_key=1c06a1911fa9fd7b91f24ab61c1f9330")
       .then(
         (result) => {
-          this.setState({imageArr:result.results, colSize: 4})
+          result && result.results && this.setState({imageArr:result.results, colSize: 4})
         },
         (error) => {
           // Handle Error page/section
@@ -68,7 +71,9 @@ export default class Home extends React.Component {
       dataFetch("https://api.themoviedb.org/3/search/movie?api_key=1c06a1911fa9fd7b91f24ab61c1f9330&query=" + val)
       .then(
         (result) => {
-          this.setState({imageArr:result.results, colSize: 4})
+          if (result && result.results) {
+            this.setState({imageArr:result.results, colSize: 4})
+          }
         },
         (error) => {
           // Handle Error page/section
