@@ -6,6 +6,7 @@ import ImageFrame from '../ImageFrame/ImageFrame';
 import CastSlider from '../CastSlider/CastSlider';
 import Overview from '../Overview/Overview';
 import Keywords from '../Keywords/Keywords';
+import { dataFetch } from '../../services/ApiService';
 
 export default class Home extends React.Component {
   constructor(props) {
@@ -26,8 +27,7 @@ export default class Home extends React.Component {
   }
 
   componentDidMount() {
-    fetch("https://api.themoviedb.org/3/genre/movie/list?language=%3Cstring%3E&api_key=1c06a1911fa9fd7b91f24ab61c1f9330")
-      .then(res => res.json())
+    dataFetch("https://api.themoviedb.org/3/genre/movie/list?language=%3Cstring%3E&api_key=1c06a1911fa9fd7b91f24ab61c1f9330")
       .then(
         (result) => {
           result.genres.unshift({"name": "New Releases"}, {"name": "Upcoming"});
@@ -42,14 +42,10 @@ export default class Home extends React.Component {
         }
       );
 
-      fetch("https://api.themoviedb.org/3/movie/now_playing?api_key=1c06a1911fa9fd7b91f24ab61c1f9330")
-      .then(res => res.json())
+      dataFetch("https://api.themoviedb.org/3/movie/now_playing?api_key=1c06a1911fa9fd7b91f24ab61c1f9330")
       .then(
         (result) => {
           this.setState({imageArr:result.results, colSize: 4, imgHeight: 150})
-          // this.setState({
-          //   genres: result.genres
-          // });
         },
         (error) => {
           // this.setState({
@@ -60,16 +56,11 @@ export default class Home extends React.Component {
   }
 
   searchCb = (val) => {
-    console.log("hiii",val, this.state.searchEnabled);
     if (val !== '') {
-      fetch("https://api.themoviedb.org/3/search/movie?api_key=1c06a1911fa9fd7b91f24ab61c1f9330&query=" + val)
-      .then(res => res.json())
+      dataFetch("https://api.themoviedb.org/3/search/movie?api_key=1c06a1911fa9fd7b91f24ab61c1f9330&query=" + val)
       .then(
         (result) => {
           this.setState({imageArr:result.results, colSize: 4, imgHeight: 150})
-          // this.setState({
-          //   genres: result.genres
-          // });
         },
         (error) => {
           // this.setState({
@@ -77,15 +68,14 @@ export default class Home extends React.Component {
           // });
         }
       );
-      this.setState({searchEnabled: true, categoryTitle: 'Showing results for '+ val});
+      this.setState({searchEnabled: true, categoryTitle: 'Showing results for '+ val });
     } else if (val === '' && this.state.searchEnabled) {
       this.setState({searchEnabled: false, categoryTitle: 'Browse movies by category'});
     }
   }
 
   getFurtherInfo = (info) => {
-    fetch("https://api.themoviedb.org/3/movie/" + info.id + "?api_key=1c06a1911fa9fd7b91f24ab61c1f9330")
-    .then(res => res.json())
+    dataFetch("https://api.themoviedb.org/3/movie/" + info.id + "?api_key=1c06a1911fa9fd7b91f24ab61c1f9330")
     .then(
       (result) => {
         this.setState({imageClick: true, colSize: 1, imgHeight: 50, imageArr: [result]});
@@ -97,14 +87,11 @@ export default class Home extends React.Component {
       }
     );
 
-    fetch("https://api.themoviedb.org/3/movie/" + info.id + "/credits?api_key=1c06a1911fa9fd7b91f24ab61c1f9330")
-      .then(res => res.json())
+    dataFetch("https://api.themoviedb.org/3/movie/" + info.id + "/credits?api_key=1c06a1911fa9fd7b91f24ab61c1f9330")
       .then(
         (result) => {
           this.setState({castList: result.cast})
-          // this.setState({
-          //   genres: result.genres
-          // });
+          
         },
         (error) => {
           // this.setState({
@@ -113,14 +100,11 @@ export default class Home extends React.Component {
         }
       );
 
-      fetch("https://api.themoviedb.org/3/movie/" + info.id + "/similar?api_key=1c06a1911fa9fd7b91f24ab61c1f9330")
-      .then(res => res.json())
+      dataFetch("https://api.themoviedb.org/3/movie/" + info.id + "/similar?api_key=1c06a1911fa9fd7b91f24ab61c1f9330")
       .then(
         (result) => {
           this.setState({recommendList: result.results})
-          // this.setState({
-          //   genres: result.genres
-          // });
+          
         },
         (error) => {
           // this.setState({
@@ -129,14 +113,11 @@ export default class Home extends React.Component {
         }
       );
 
-      fetch("https://api.themoviedb.org/3/movie/" + info.id + "/keywords?api_key=1c06a1911fa9fd7b91f24ab61c1f9330")
-      .then(res => res.json())
+      dataFetch("https://api.themoviedb.org/3/movie/" + info.id + "/keywords?api_key=1c06a1911fa9fd7b91f24ab61c1f9330")
       .then(
         (result) => {
           this.setState({chipList: result.keywords})
-          // this.setState({
-          //   genres: result.genres
-          // });
+          
         },
         (error) => {
           // this.setState({
@@ -178,7 +159,7 @@ export default class Home extends React.Component {
                         <ImageFrame colSize={1} height={25} imageArr={this.state.imageArr}/>
                       </div>
                       <div className="keywords">
-                      <h2>KEYWORDS</h2>
+                      <h2>Keywords</h2>
                       <Keywords chips={this.state.chipList}/>
                       </div>
                     </div>

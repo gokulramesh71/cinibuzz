@@ -12,7 +12,7 @@ function Search(props) {
       sx={{ display: 'flex', alignItems: 'center', width: '100%', minHeight:200, backgroundColor: '#F0F0F0', justifyContent: 'center', flexDirection:'column',
       borderRadius: '10px'}}
     >
-          <div style={{fontSize: '20px', padding: '20px'}}>Find perfect movie for evening</div>
+          <div style={{fontSize: '20px', padding: '20px'}}>Find perfect movie for <b>evening</b></div>
           <div style={{display:'flex', flexDirection: 'row', width: '100%', justifyContent: 'center', alignItems: 'center'}}>
             <Paper 
                   sx={{ display: 'flex', width: '60%', justifyContent: 'center', alignItems: 'center' }}

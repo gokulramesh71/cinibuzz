@@ -3,6 +3,7 @@ import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
 import ImageListItemBar from '@mui/material/ImageListItemBar';
 import { IconButton } from '@mui/material';
+import { dateFormat, subTitle } from '../../services/Utils';
 
 function ImageFrame(props) {
   return (
@@ -18,15 +19,15 @@ function ImageFrame(props) {
           />
           <ImageListItemBar
             title={item.title}
-            subtitle={item.release_date}
+            subtitle={props.colSize === 1 ? subTitle(item) : dateFormat(item.release_date)}
             sx={{background: 'none', fontWeight: 'bolder'}}
             position={props.colSize === 1 ? "bottom":"below"}
             actionIcon={
-              <IconButton
+              props.colSize === 1 && <IconButton
                 sx={{ fontSize:'10px', color: 'green', borderColor: 'white', borderRadius: '20px', lineHeight: '20px', border: '2px solid white', mr: '6px', backgroundColor: 'white' }}
                 aria-label={`info about ${item.title}`}
               >
-                83%
+               {item.vote_average * 10}%
               </IconButton>
             }
           />
