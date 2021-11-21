@@ -7,15 +7,16 @@ import { dateFormat, subTitle } from '../../services/Utils';
 
 function ImageFrame(props) {
   return (
-    <ImageList sx={{ width: '100%',overflowY: 'hidden' }} cols={props.colSize} gap={30}>
+    <ImageList sx={{ width: '100%',overflowY: 'hidden' }} cols={props.colSize}>
       {props.imageArr && props.imageArr.map((item) => (
-        <ImageListItem key={item.id} sx={{ objectFit: 'unset', borderRadius: '15px' }} >
+        <ImageListItem key={item.id} sx={{ objectFit: 'unset', borderRadius: '15px', width: `${props.width}em`, height: `${props.height}em !important` }} >
           <img
-            src={`https://image.tmdb.org/t/p/w500${item.poster_path}?w=100&h=${props.colSize === 1 ? props.height: 150}&fit=crop&auto=format`}
-            srcSet={`https://image.tmdb.org/t/p/w500${item.poster_path}?w=100&h=${props.colSize === 1 ? props.height: 150}&fit=crop&auto=format&dpr=2 1x`}
+            src={`https://image.tmdb.org/t/p/w500${item.poster_path}?w=100&h=150&fit=crop&auto=format`}
+            srcSet={`https://image.tmdb.org/t/p/w500${item.poster_path}?w=100&h=150&fit=crop&auto=format&dpr=2 1x`}
             alt={item.title}
             loading="lazy"
             onClick={() => {props.furtherInfoCb(item)}}
+            style={{borderRadius:'10px'}}
           />
           <ImageListItemBar
             title={item.title}

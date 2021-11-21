@@ -19,12 +19,20 @@ export default class Home extends React.Component {
       genres: [],
       imageArr:[],
       colSize: 4,
-      imgHeight: 150,
+      imgWidth: '15',
+      imgHeight: '30',
+      imageBgWidth: '100',
+      imageBgHeight: '50',
+      imageCastWidth: '40',
+      imageCastHeight: '25',
+      imageRecmndWidth: '20',
+      imageRecmndHeight: '35',
       castList:[],
       recommendList:[],
       chipList:[]
     };
   }
+
 
   componentDidMount() {
     dataFetch("https://api.themoviedb.org/3/genre/movie/list?language=%3Cstring%3E&api_key=1c06a1911fa9fd7b91f24ab61c1f9330")
@@ -45,7 +53,7 @@ export default class Home extends React.Component {
       dataFetch("https://api.themoviedb.org/3/movie/now_playing?api_key=1c06a1911fa9fd7b91f24ab61c1f9330")
       .then(
         (result) => {
-          this.setState({imageArr:result.results, colSize: 4, imgHeight: 150})
+          this.setState({imageArr:result.results, colSize: 4})
         },
         (error) => {
           // this.setState({
@@ -60,7 +68,7 @@ export default class Home extends React.Component {
       dataFetch("https://api.themoviedb.org/3/search/movie?api_key=1c06a1911fa9fd7b91f24ab61c1f9330&query=" + val)
       .then(
         (result) => {
-          this.setState({imageArr:result.results, colSize: 4, imgHeight: 150})
+          this.setState({imageArr:result.results, colSize: 4})
         },
         (error) => {
           // this.setState({
@@ -78,7 +86,7 @@ export default class Home extends React.Component {
     dataFetch("https://api.themoviedb.org/3/movie/" + info.id + "?api_key=1c06a1911fa9fd7b91f24ab61c1f9330")
     .then(
       (result) => {
-        this.setState({imageClick: true, colSize: 1, imgHeight: 50, imageArr: [result]});
+        this.setState({imageClick: true, colSize: 1, imgWidth: this.state.imageBgWidth, imgHeight: this.state.imageBgHeight, imageArr: [result]});
       },
       (error) => {
         // this.setState({
@@ -148,7 +156,7 @@ export default class Home extends React.Component {
                   </div>}
                   {!this.state.imageClick && <h5 className="categoryTitle">{this.state.categoryTitle}</h5>}
                   {(!this.state.searchEnabled && !this.state.imageClick) && <CategoryList options={this.state.genres}/>}
-                  <ImageFrame colSize={this.state.colSize} height={this.state.imgHeight} imageArr={this.state.imageArr} furtherInfoCb={this.getFurtherInfo}/>
+                  <ImageFrame colSize={this.state.colSize} width={this.state.imgWidth} height={this.state.imgHeight} imageArr={this.state.imageArr} furtherInfoCb={this.getFurtherInfo}/>
                   {this.state.imageClick && <Overview rows={this.state.imageArr}/>}
                   {this.state.imageClick && <CastSlider castList={this.state.castList}/>}
                   {this.state.imageClick && <div className="mediaEx">
@@ -156,7 +164,7 @@ export default class Home extends React.Component {
                       <div className="mediaBlock">
                         <h2>Media</h2>
                         <CategoryList options={[{'name':'Most Popular'}, {'name':'Videos'}, {'name':'Backdrops'}, {'name':'Posters'}]}/>
-                        <ImageFrame colSize={1} height={25} imageArr={this.state.imageArr}/>
+                        <ImageFrame colSize={1} width={this.state.imageCastWidth} height={this.state.imageCastHeight} imageArr={this.state.imageArr}/>
                       </div>
                       <div className="keywords">
                       <h2>Keywords</h2>
@@ -164,7 +172,7 @@ export default class Home extends React.Component {
                       </div>
                     </div>
                       <h2>Recommendations</h2>
-                      <ImageFrame colSize={3} height={25} imageArr={this.state.recommendList}/>
+                      <ImageFrame colSize={3} height={this.state.imageRecmndHeight} width={this.state.imageRecmndWidth} imageArr={this.state.recommendList}/>
                     <div>
 
                     </div>

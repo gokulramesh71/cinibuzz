@@ -2,7 +2,6 @@ import React from 'react';
 import Box from '@mui/material/Box';
 import Tabs, { tabsClasses } from '@mui/material/Tabs';
 import Tab from "@mui/material/Tab";
-import Typography from '@mui/material/Typography';
 import ImageListItem from '@mui/material/ImageListItem';
 import ImageListItemBar from '@mui/material/ImageListItemBar';
 
@@ -15,9 +14,9 @@ function CastSlider(props) {
 
   return (
     <Box sx={{ flexGrow: 1, bgcolor: "background.paper" }}>
-    <Typography variant="h5" component="h5">
+    <h2>
       Cast
-    </Typography>
+    </h2>
     <Tabs
       variant="scrollable"
       scrollButtons
@@ -34,7 +33,7 @@ function CastSlider(props) {
           return <Tab
                   key={ind}
                   icon={
-                  <ImageListItem>
+                  <ImageListItem sx={{width: '20em'}}>
                     <img
                     src={`https://image.tmdb.org/t/p/w500${cast.profile_path}?w=100&h=150&fit=crop&auto=format`}
                     srcSet={`https://image.tmdb.org/t/p/w500${cast.profile_path}?w=100&h=150&fit=crop&auto=format&dpr=2 1x`}
